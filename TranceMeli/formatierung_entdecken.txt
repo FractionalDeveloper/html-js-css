@@ -1,0 +1,28 @@
+MEINE UNFORMATIERTE WEBSEITE
+-------------------------------
+
+DIESER TEXT SOLL EINE HAUPTÜBERSCHRIFT SEIN
+
+Dieser Text soll eine Unterüberschrift sein
+
+Dies ist ein normaler Textabschnitt. So sollte ein Standardtext auf meiner Webseite aussehen. Ich möchte, dass dieser Text als zusammengehöriger Block dargestellt wird.
+
+AUFGABEN ZUR TEXTFORMATIERUNG:
+
+- Dieser Text soll fett dargestellt werden.
+- Dieser Text soll kursiv dargestellt werden.
+- Dieser Text soll unterstrichen sein.
+- DIESER TEXT SOLL BESONDERS HERVORGEHOBEN WERDEN.
+- Dieser Text soll durchgestrichen sein.
+
+Das hier sollte als Zitat gekennzeichnet werden: Die Freiheit des Menschen liegt nicht darin, dass er tun kann, was er will, sondern, dass er nicht tun muss, was er nicht will.
+
+LISTE MEINER LIEBLINGSFILME:
+1. Film Nummer eins
+2. Film Nummer zwei
+3. Film Nummer drei
+
+DINGE, DIE ICH HEUTE ERLEDIGEN MÖCHTE:
+* Einkaufen gehen
+* E-Mails beantworten
+* Sport machen
