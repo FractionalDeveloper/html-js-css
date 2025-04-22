@@ -1,28 +1,31 @@
 MEINE UNFORMATIERTE WEBSEITE
 -------------------------------
 
-DIESER TEXT SOLL EINE HAUPTÜBERSCHRIFT SEIN
+<h1>DIESER TEXT SOLL EINE HAUPTÜBERSCHRIFT SEIN</h1>
 
-Dieser Text soll eine Unterüberschrift sein
+<h2>Dieser Text soll eine Unterüberschrift sein</h2>
 
-Dies ist ein normaler Textabschnitt. So sollte ein Standardtext auf meiner Webseite aussehen. Ich möchte, dass dieser Text als zusammengehöriger Block dargestellt wird.
+<p>Dies ist ein normaler Textabschnitt. So sollte ein Standardtext auf meiner Webseite aussehen. Ich möchte, dass dieser Text als zusammengehöriger Block dargestellt wird.</p>
 
 AUFGABEN ZUR TEXTFORMATIERUNG:
 
-- Dieser Text soll fett dargestellt werden.
-- Dieser Text soll kursiv dargestellt werden.
-- Dieser Text soll unterstrichen sein.
-- DIESER TEXT SOLL BESONDERS HERVORGEHOBEN WERDEN.
-- Dieser Text soll durchgestrichen sein.
+<b>- Dieser Text soll fett dargestellt werden.</b>
+<i>- Dieser Text soll kursiv dargestellt werden.</i>
+<u>- Dieser Text soll unterstrichen sein.</u>
+<strong>- DIESER TEXT SOLL BESONDERS HERVORGEHOBEN WERDEN.</strong>
+<del>- Dieser Text soll durchgestrichen sein.</del>
 
 Das hier sollte als Zitat gekennzeichnet werden: Die Freiheit des Menschen liegt nicht darin, dass er tun kann, was er will, sondern, dass er nicht tun muss, was er nicht will.
 
-LISTE MEINER LIEBLINGSFILME:
-1. Film Nummer eins
-2. Film Nummer zwei
-3. Film Nummer drei
+<b>LISTE MEINER LIEBLINGSFILME:</b>
+<ol>
+<li> Film Nummer eins</li>
+<li> Film Nummer zwei</li>
+<li> Film Nummer drei</li>
+</ol>
 
-DINGE, DIE ICH HEUTE ERLEDIGEN MÖCHTE:
-* Einkaufen gehen
-* E-Mails beantworten
-* Sport machen
+<p>DINGE, DIE ICH HEUTE ERLEDIGEN MÖCHTE:</p>
+<ul>
+<li> Einkaufen gehen</li>
+<li> E-Mails beantworten</li>
+<li> Sport machen</li>
