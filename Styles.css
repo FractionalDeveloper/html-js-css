@@ -37,3 +37,31 @@ p
     padding: 15px;
     margin: 20px;
 }
+
+.card
+{
+    width: 300px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.card:hover
+{
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.flex-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    padding: 20px;
+    margin: 30px;
+    flex-direction: column;
+}
+
