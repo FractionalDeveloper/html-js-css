@@ -3,4 +3,13 @@ body
     background: #292929;
     font-family: 'Courier New', Courier, monospace;
     color: white;
+    margin: 0px;
+}
+
+h1{
+    color: orange;
+}
+
+h2{
+    color: yellow;
 }
