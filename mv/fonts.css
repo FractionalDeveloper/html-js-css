@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"); /* ich habe eine eigene Klasse erstellt die mich die Schriftarten abrufen lässt, falls mehr dazu kommen*/
+
+.font01 {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font02 {
+    
+}
