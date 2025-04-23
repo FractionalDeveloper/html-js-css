@@ -23,3 +23,21 @@ h1:hover {
 
 
 }
+
+/*Übung 2*/
+
+p {
+    font-family: 'Roboto';
+    line-height: 1.6;
+    text-align: justify;
+    border: 1px solid #ccc;
+    border-radius: ;
+
+
+}
+
+p::first-letter {
+    font-size: 2em;
+    color: #e91e63;
+
+}
