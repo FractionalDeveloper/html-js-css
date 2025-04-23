@@ -1,0 +1,25 @@
+body
+{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1
+{
+    font-size: 70px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px dashed #333;
+    background: linear-gradient(#1a73e8, #9c27b0);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 3px rgba(0,0,0.3);
+}
+
+h1:hover
+{
+    background: none;
+    -webkit-text-fill-color: #ff5722;
+    color: #ff5722;
+    background-color: #f0f0f0;
+}
