@@ -1,0 +1,24 @@
+.card{
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 20px;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+.card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    
+}
+
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: linear-gradient(to right,#f5f7fa,#c3cfe2);
+    padding: 20px;
+    margin: 30px;
+    flex-direction: column;
+}
