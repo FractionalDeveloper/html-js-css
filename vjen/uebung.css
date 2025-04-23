@@ -31,7 +31,10 @@ p {
     line-height: 1.6;
     text-align: justify;
     border: 1px solid #ccc;
-    border-radius: ;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px;
+    box-sizing: border-box;
 
 
 }
@@ -40,4 +43,33 @@ p::first-letter {
     font-size: 2em;
     color: #e91e63;
 
+}
+
+
+/*Übung 3*/
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    margin: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.card {
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
