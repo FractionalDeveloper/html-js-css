@@ -1,0 +1,55 @@
+/* Übung 1: Überschrift mit Spezialeffekten */
+h1 {
+    /* Farbverlauf von Blau zu Violett */
+    background-image: linear-gradient(to right, #1a73e8, #9c27b0);
+    background-clip: text;
+    color: transparent;
+    
+    /* Text-Schatten */
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    
+    /* Großbuchstaben und Buchstabenabstand */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Untere Grenzlinie */
+    border-bottom: 2px dashed #333;
+    
+    /* Zusätzliche Formatierung für bessere Darstellung */
+    padding: 10px 0;
+    display: inline-block;
+    
+    /* Übergangseffekt für Hover */
+    transition: all 0.3s ease;
+}
+
+/* Hover-Effekt für die Überschrift */
+h1:hover {
+    background-image: none;
+    background-color: #f0f0f0;
+    color: #ff5722;
+}
+
+/* Übung 2: Formatierter Absatz */
+p {
+    /* Benutzerdefinierte Schriftart */
+    font-family: 'Roboto', sans-serif;
+    
+    /* Zeilenhöhe und Textausrichtung */
+    line-height: 1.6;
+    text-align: justify;
+    
+    /* Umrandung mit abgerundeten Ecken */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    
+    /* Innen- und Außenabstand */
+    padding: 15px;
+    margin: 20px;
+}
+
+/* Erster Buchstabe größer und anders gefärbt */
+p::first-letter {
+    font-size: 2em;
+    color: #e91e63;
+}
