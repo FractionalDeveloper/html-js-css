@@ -1,0 +1,33 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card{
+    font-size: 60px;
+    width: 300px;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    transition: ease 0.3s;
+}
+
+.flex-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 30px;
+    padding: 20px;
+
+}
