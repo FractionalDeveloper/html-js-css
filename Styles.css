@@ -1,0 +1,30 @@
+h1 {
+  background-image: linear-gradient(to right, #1a73e8, #9c27b0);
+  background-clip: text ;
+  color : transparent;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px dashed #333;
+}
+
+h1:hover{
+  background-image: none;
+  background-color: white;
+  color: #FF5722;
+}
+
+p{
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  text-align: justify;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px;
+}
+
+p::first-letter{
+  font-size: 2em;
+  color: #e91e63;
+}
