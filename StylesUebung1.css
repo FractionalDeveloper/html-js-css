@@ -16,3 +16,17 @@ h1:hover{
     background-color: #f0f0f0;
     color: #ff5722;
 }
+p{
+    font-family: fantasy;
+    border-style: groove;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 15px;
+}
+p::first-letter{
+    font-size: 2em;
+    color: #e91363;
+    line-height: 1.6;
+    text-align: justify;
+}
