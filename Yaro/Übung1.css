@@ -1,15 +1,16 @@
 h1 {
-    background-image:linear-gradient(to right, #1a73e8, #9c27b0);
-    color: transparent;
+    background: linear-gradient(to right, #1a73e8, #9c27b0);
     background-clip: text;
+    color: transparent;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-decoration: underline dotted #333;
-    text-decoration-thickness: 3px;
+    border-bottom: 2px dashed #333;
+    transition: all 0.3s ease;
+
 }
 
-h1:hover{
+h1:hover {
     background-color: #f0f0f0;
     color: #ff5722;
 }
