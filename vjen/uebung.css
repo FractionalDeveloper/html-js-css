@@ -1,0 +1,25 @@
+h1 {
+    background: linear-gradient(#1a73e8, #9c27b0);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0, 3);
+    /* textschatten(sehr dunkel)*/
+
+    text-transform: uppercase;
+    /* großbuchstaben*/
+
+    letter-spacing: 2px;
+    /*buchstabenabstand*/
+    border-bottom: 2px dashed #333;
+    /* gestrichelte grenzlinie*/
+
+}
+
+h1:hover {
+    background: none;
+    -webkit-text-fill-color: #ff5722;
+    color: #ff5722;
+    background-color: #f0f0f0;
+
+}
