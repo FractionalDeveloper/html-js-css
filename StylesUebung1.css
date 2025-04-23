@@ -30,3 +30,31 @@ p::first-letter{
     line-height: 1.6;
     text-align: justify;
 }
+.card{
+    width: 300px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgby(0,0,0,0.2);
+    padding: 20px;
+}
+.card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    margin: 30px;
+    padding: 20px;  
+}
+@media (max-width: 768px){
+    .flex{
+        flex-direction: column;
+    } 
+}
+    
+
