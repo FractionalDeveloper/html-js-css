@@ -10,32 +10,18 @@
     
     <!-- Externes Stylesheet einbinden -->
     <link rel="stylesheet" href="styles.css">
+    <script src="lib.js"></script>
 </head>
 <body>
 
 <!-- Beispiel 1: Alert -->
-<button onclick="zeigeNachricht()">Zeig eine Nachricht</button>
-<script>
-    function zeigeNachricht() {
-        alert("Hallo, ich bin eine Nachricht");
-    }
-</script>
-
-<!-- Beispiel 2: Konsole -->
-<button onclick="loggeInKonsole()">In Konsole schreiben</button>
-<script>
-    function loggeInKonsole() {
-        console.log("Hallo, ich bin eine Konsolennachricht!");
-    }
-</script>
-
-<!-- Beispiel 3: DOM-Manipulation -->
-<p id="veraenderbarer-text">Dieser Text soll sich ändern</p>
-<button onclick="textAendern()">Text ändern</button>
-<script>
-    function textAendern() {
-        document.getElementById("veraenderbarer-text").innerHTML="Wow, du hast es geschafft den Knopf zu drücken!!!";
-    }
-</script>
+<button onclick="nameAnzeigen()">Zeig vollständiger Name</button>
+<button onclick="zahlAnzeigen(ergebnis)">Zeig Zahlen Ergebnis</button>
+<button onclick="zeigeBool(istWahr,istFalsch)">Zeig wahr und falsch</button>
+<!-- Hier soll ein weiter Input -->
+<!-- Der Inhalt vom Input wird in das Array farben hinzugefügt -->
+<!-- und jedes Mal nach dem hinzufügen wird das ganze array ausgegeben auf die Konsole -->
+<input type="text" id="inputForColours"/>
+<button onclick="neueFarbeHinzufügen()">Füge eine Farbe hinzu und gebe alle Farben aus</button>
 </body>
 </html>
