@@ -1,12 +1,32 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 /* Grundlegende Stile */
 body {
-    font-family: Arial, sans-serif;
+    
     margin: 0;
     padding: 0;
+    margin: 20px;
+    background: #292929;
+    color: grey;
 }
 
 .container {
     /* Füge hier deine Styles hinzu */
+    border: solid 4px orange;
+    text-align: center;
+    padding: 20px;
+    
+}
+
+button{
+    padding: 10px;
+    background: orange;
+}
+
+input{
+    background: grey;;
+    padding: 5px;
 }
 
 .hidden {
@@ -15,22 +35,32 @@ body {
 
 /* Styles für verschiedene Altersgruppen */
 .child {
+
+    color: rgb(243, 29, 136);
     /* Styles für Kinder unter 12 */
 }
 
 .teen {
+
+    color: orange;
     /* Styles für Jugendliche 12-17 */
 }
 
 .adult {
+
+    color: green;
     /* Styles für Erwachsene 18+ */
 }
 
 /* Styles für Ergebnis-Anzeige */
 .allowed {
+
+    color: greenyellow;
     /* Styles für erlaubten Eintritt */
 }
 
 .denied {
+
+    color: red;
     /* Styles für verweigerten Eintritt */
 }
