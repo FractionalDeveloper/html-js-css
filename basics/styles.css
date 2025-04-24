@@ -3,10 +3,16 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    text-align: center;
+    justify-content: center;
 }
 
 .container {
-    /* Füge hier deine Styles hinzu */
+    position: fixed;
+    border: 2px solid #000;
+    border-radius: 15px;
+    margin: 15px;
+    padding: 15px;
 }
 
 .hidden {
@@ -26,7 +32,6 @@ body {
     /* Styles für Erwachsene 18+ */
 }
 
-/* Styles für Ergebnis-Anzeige */
 .allowed {
     /* Styles für erlaubten Eintritt */
 }
@@ -34,3 +39,4 @@ body {
 .denied {
     /* Styles für verweigerten Eintritt */
 }
+
