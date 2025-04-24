@@ -1,0 +1,36 @@
+/* Grundlegende Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* Füge hier deine Styles hinzu */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Styles für verschiedene Altersgruppen */
+.child {
+    /* Styles für Kinder unter 12 */
+}
+
+.teen {
+    /* Styles für Jugendliche 12-17 */
+}
+
+.adult {
+    /* Styles für Erwachsene 18+ */
+}
+
+/* Styles für Ergebnis-Anzeige */
+.allowed {
+    /* Styles für erlaubten Eintritt */
+}
+
+.denied {
+    /* Styles für verweigerten Eintritt */
+}
