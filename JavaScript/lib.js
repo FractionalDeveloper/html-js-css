@@ -4,6 +4,7 @@ let nachname = 'Mustermann';
 let vollständigerName = name + " " + nachname;
 console.log(vollständigerName);
 
+
 // Station 2: Zahlen
 let ganzzahl = 42;
 let kommazahl = 3.14;
@@ -21,3 +22,23 @@ console.log(istWahr || istFalsch); // ODER
 let farben = ["rot", "grün", "blau"];
 console.log(farben[0]); // Erstes Element
 farben.push("gelb"); // Neues Element hinzufügen
+
+function zeigeVollständigenNamen(){
+    console.log(vollständigerName);
+}
+
+function zeigeZahlenErgebnis(){
+    console.log(ergebnis);
+}
+
+function zeigeWahrheitswerte(){
+    console.log(istWahr && istFalsch);       // Semikolen ist optional
+    console.log(istWahr || istFalsch)
+}
+
+function fügeFarbeHinzu(){
+    let inputFeld = document.getElementById("inputForColours")
+    farben.push(inputFeld.value)
+    console.log(farben)
+    
+}
