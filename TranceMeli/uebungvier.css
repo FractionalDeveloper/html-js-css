@@ -1,0 +1,61 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px;
+    background-color: #292929;
+}
+
+
+.navbar{
+    display: flex;
+}
+
+ul
+{
+    list-style-type: none;
+    font-size: 40px;
+    padding: 15px;
+}
+
+li
+{
+    display: inline;
+}
+
+a:hover
+{
+background-color: #2196f3;
+color:white;
+}
+
+a:active{
+    background-color: orange;
+    text-transform: uppercase;
+}
+
+.mybutton{
+    background: linear-gradient(to right, blue, #45a049);
+    border-radius: 4px;
+    color: white;
+    font-size: 40px;
+    border: none;
+}
+
+.mybutton:hover
+{
+    filter: invert(100%);
+    
+}
+
+.mybutton:active
+{
+    transform: translateY(2px);
+    
+}
+
+i{
+    color: white;
+}
+
+.mybutton i{
+    margin-right: 20px;
+}
