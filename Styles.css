@@ -95,7 +95,7 @@ nav
     font-weight: bold;
     border-radius: 5px;
 }
-@media (max-width: 600px)
+@media (max-width: 768px)
 {
      .navbar
     {

@@ -17,7 +17,7 @@
 <button onclick="zeigeNachricht()">Zeig eine Nachricht</button>
 <script>
     function zeigeNachricht() {
-        // Was könntest du hier einfügen?
+        alert("Test");
     }
 </script>
 
@@ -25,17 +25,21 @@
 <button onclick="loggeInKonsole()">In Konsole schreiben</button>
 <script>
     function loggeInKonsole() {
-        // Was könntest du hier einfügen?
+        console.log("In Konsole schreiben")
     }
 </script>
 
 <!-- Beispiel 3: DOM-Manipulation -->
+<input type="text" id="i"/>
 <p id="veraenderbarer-text">Dieser Text soll sich ändern</p>
 <button onclick="textAendern()">Text ändern</button>
 <script>
     function textAendern() {
-        // Wie könntest du den Text oben verändern?
+        let x = document.getElementById("i").value;
+        document.getElementById('veraenderbarer-text').innerHTML = x;
     }
 </script>
+
+
 </body>
 </html>
