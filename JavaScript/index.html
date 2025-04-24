@@ -18,6 +18,7 @@
 <script>
     function zeigeNachricht() {
         // Was könntest du hier einfügen?
+        alert("Hallo, Welt!");
     }
 </script>
 
@@ -25,7 +26,7 @@
 <button onclick="loggeInKonsole()">In Konsole schreiben</button>
 <script>
     function loggeInKonsole() {
-        // Was könntest du hier einfügen?
+        console.log("Hallo, Welt!");
     }
 </script>
 
@@ -35,6 +36,8 @@
 <script>
     function textAendern() {
         // Wie könntest du den Text oben verändern?
+        var textElement = document.getElementById("veraenderbarer-text");
+        textElement.innerHTML = "Der Text wurde geändert!";
     }
 </script>
 </body>
