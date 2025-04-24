@@ -2,4 +2,11 @@ body{
     background: #292929;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
+    color: orange;
+}
+
+button{
+    background: orange;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
 }
