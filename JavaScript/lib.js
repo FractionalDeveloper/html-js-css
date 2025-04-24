@@ -30,5 +30,6 @@ let ifarben = document.getElementById("inputForColours").value;
 console.log(farben[0]); // Erstes Element
 farben.push(ifarben); // Neues Element hinzufügen 
 console.log(farben);
+ifarben = "";
 }
 let farben = ["rot", "grün", "blau"];
