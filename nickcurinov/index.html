@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Testdateihtml</title>
-<link rel="stylesheet" href="uebung2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-Übungen: Textformatierung</title>
+    
+    <!-- Google Fonts einbinden -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Externes Stylesheet einbinden -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-MEINE UNFORMATIERTE WEBSEITE<br>
--------------------------------
 
-<H1>Dieser Text soll eine Hauptüberschrift sein</H1>
+<!-- Beispiel 1: Alert -->
+<button onclick="zeigeNachricht()">Zeig eine Nachricht</button>
+<script>
+    function zeigeNachricht() {
+        alert("Hallo, ich bin eine Nachricht");
+    }
+</script>
 
-<H2>Dieser Text soll eine Unterüberschrift sein</H2>
+<!-- Beispiel 2: Konsole -->
+<button onclick="loggeInKonsole()">In Konsole schreiben</button>
+<script>
+    function loggeInKonsole() {
+        console.log("Hallo, ich bin eine Konsolennachricht!");
+    }
+</script>
 
-<img src="https://spur-photo.com/wp-content/uploads/Beispielbild-Pinhole-Rollei-Ortho-25-Planfilm-in-SPUR-ACUROL-N-4.jpg" height="300" width="210">
-
-<p style="color:darkblue">Dies ist ein normaler Textabschnitt. <br>So sollte ein Standardtext auf meiner Webseite aussehen. <br>Ich möchte, dass dieser Text als zusammengehöriger Block dargestellt wird.</p>
-
-AUFGABEN ZUR TEXTFORMATIERUNG:
-
-<b style="background-color:beige">- Dieser Text soll fett dargestellt werden.</b>
-<i>- Dieser Text soll kursiv dargestellt werden.</i>
-<u>- Dieser Text soll unterstrichen sein.</u>
-<strong>- DIESER TEXT SOLL BESONDERS HERVORGEHOBEN WERDEN.</strong>
-<del>- Dieser Text soll durchgestrichen sein.</del>
-
-Das hier sollte als Zitat gekennzeichnet werden: <blockquote>Die Freiheit des Menschen liegt nicht darin, dass er tun kann, was er will, sondern, dass er nicht tun muss, was er nicht will.</blockquote>
-
-<p>LISTE MEINER LIEBLINGSFILME:
-<br>1. Film Nummer eins
-<br>2. Film Nummer zwei
-<br>3. Film Nummer drei</p>
-
-DINGE, DIE ICH HEUTE ERLEDIGEN MÖCHTE:
-<br>* Einkaufen gehen
-<br>* E-Mails beantworten
-<br>* Sport machen
+<!-- Beispiel 3: DOM-Manipulation -->
+<p id="veraenderbarer-text">Dieser Text soll sich ändern</p>
+<button onclick="textAendern()">Text ändern</button>
+<script>
+    function textAendern() {
+        document.getElementById("veraenderbarer-text").innerHTML="Wow, du hast es geschafft den Knopf zu drücken!!!";
+    }
+</script>
 </body>
 </html>
