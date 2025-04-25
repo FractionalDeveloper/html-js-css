@@ -6,40 +6,32 @@ const checkButton = document.getElementById('checkButton');
 
 // Event-Listener für den Button
 checkButton.addEventListener('click', function () {
-    console.log(ageInput.value);
-    inputSection.classList.add("hidden");
-    const age = ageInput.value;
-    const isAllowed = checkEntryTime(age);
-    console.log(isAllowed);
-    showResult(age, isAllowed);
-    ageInput.value = "";
+    const age = parseInt(ageInput.value);
 
-});
+    if (isNaN(age) || age <= 0 || age > 120) {
+        alert(`Bitte gibt ein gültiges Alter ein. Von 1 bis 120.`)
+        return;
+    }
 
-ageInput.addEventListener('change', function () {
-    const age = ageInput.value;
     const isAllowed = checkEntryTime(age);
-    console.log(isAllowed);
-    showResult(age, isAllowed);
+
+    showResult(age, isAllowed)
+
+    resultSection.classList.remove('hidden');
 });
 
 // Funktion zur Überprüfung der Eintrittszeit
 function checkEntryTime(age) {
-    const currentTime = new Date().getHours;
+    const now = new Date();
+    const hours = now.getHours();
+
     if (age < 12) {
-        if (currentTime >= 8 && currentTime < 12) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    } else if (age >= 12 && age <= 17) {
-        if (currentTime >= 12 && currentTime < 16) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
+        return hours >= 8 && hours < 12;
+    } 
+    else if (age < 18) {
+        return hours >= 12 && hours < 16;
+    } 
+    else {
         return true;
     }
 }
@@ -47,34 +39,31 @@ function checkEntryTime(age) {
 // Funktion zum Anzeigen des Ergebnisses
 function showResult(age, isAllowed) {
     let ageGroup;
-    let resultHtml;
-    if (!age) {
-        resultHtml = "ungültig";
-        foramtResultHtml(resultHtml, altersgruppe);
-        return;
-    }
-    
+    let timeRange;
+
     if (age < 12) {
         ageGroup = 'child';
-    } else if (age >= 12 && age <= 17) {
+        timeRange = '8:00 Uhr bis 12:00 Uhr';
+    } 
+    else if (age < 18) {
         ageGroup = 'teen';
-    } else {
+        timeRange = '12:00 Uhr bis 16:00 Uhr';
+    } 
+    else {
         ageGroup = 'adult';
+        timeRange = 'jederzeit';
     }
 
-    if (isAllowed) {
-        resultHtml = "yeeey du darfst rein";
-    }
-    else
-    {
-        resultHtml = "nöööööööö";
-    }
-
-    foramtResultHtml(resultHtml, altersgruppe);
-
-    resultHtml = `<div class="${altersgruppe}">${resultHtml}</div>`;
-    console.log("ich bin im showresulte " + resultHtml);
-    resultSection.innerHTML = resultHtml;
-    resultSection.classList.remove("hidden");
+    let resultHTML = `
+        <div class="${ageGroup}">
+            <h2>Ergebnis der Prüfung</h2>
+            <p>Du bist ${age} Jahre alt.</p>
+            <p>Für deine Altersgruppe ist der Eintritt ${timeRange} erlaubt.</p>
+            <p class="${isAllowed ? 'allowed' : 'denied'}">
+                ${isAllowed ? 'Eintritt gestattet! ✅' : 'Eintritt verweigert! ❌'}
+            </p>
+        </div>
+    `;
+    resultSection.innerHTML = resultHTML;
 
 }
