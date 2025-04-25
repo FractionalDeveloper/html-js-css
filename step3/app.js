@@ -116,6 +116,20 @@ function setupTodoForm() {
  */
 function addNewTodo() {
     // TODO: Implementiere die Funktion zum Hinzufügen eines neuen Todos
+
+    const newTodo = {
+        id: Date.now(),
+        title: todoTitleInput.value.trim(),
+        assignee: todoAssigneeInput.value.trim(),
+        deadline: todoDeadlineInput.value.trim(),
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+
+    todos.push(newTodo); // Todo zum Array hinzufügen
+    renderTodoList(); // Todo-Liste aktualisieren
+    todoForm.reset(); // Formular zurücksetzen
+    console.log(newTodo); //Debugging-Zwecke
 }
 
 /**
@@ -137,6 +151,18 @@ function addNewTodo() {
  */
 function renderTodoList() {
     // TODO: Implementiere die Funktion zum Anzeigen der Todo-Liste
+
+    todoList.innerHTML = ''; // Liste leeren
+    if (todos.length === 0) {
+        const message = document.createElement('p');
+        message.textContent = 'Keine Todos vorhanden.';
+        todoList.appendChild(message);
+        return;
+    }
+    todos.forEach(todo => {
+        const todoElement = createTodoElement(todo);
+        todoList.appendChild(todoElement);
+    });
 }
 
 /**
@@ -167,6 +193,47 @@ function renderTodoList() {
  */
 function createTodoElement(todo) {
     // TODO: Implementiere die Funktion zum Erstellen eines Todo-Elements
+
+    const todoItem = document.createElement('li');
+    todoItem.classList.add('todo-item');
+
+    if (todo.completed) {
+        todoItem.classList.add('completed');
+    }
+    if (isOverdue(todo.deadline)) {
+        todoItem.classList.add('overdue');
+    }
+ 
+    const titleSpan = document.createElement('span');
+    titleSpan.classList.add('todo-title');
+    titleSpan.textContent = todo.title;
+
+    const assigneeSpan = document.createElement('span');
+    assigneeSpan.classList.add('todo-assignee');
+    assigneeSpan.textContent = todo.assignee;
+
+    const deadlineSpan = document.createElement('span');
+    deadlineSpan.classList.add('todo-deadline');
+    deadlineSpan.textContent = formatDate(todo.deadline);
+
+    const completeButton = document.createElement('button');
+    completeButton.classList.add('todo-complete-button');
+    completeButton.textContent = 'Erledigt';
+    completeButton.addEventListener('click', () => toggleTodoComplete(todo.id));
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('todo-delete-button');
+    deleteButton.textContent = 'Löschen';
+    deleteButton.addEventListener('click', () => deleteTodo(todo.id));
+
+    todoItem.appendChild(titleSpan);
+    todoItem.appendChild(assigneeSpan);
+    todoItem.appendChild(deadlineSpan);
+    todoItem.appendChild(completeButton);
+    todoItem.appendChild(deleteButton);
+
+    return todoItem;
+
 }
 
 /**
@@ -186,6 +253,14 @@ function createTodoElement(todo) {
  */
 function toggleTodoComplete(todoId) {
     // TODO: Implementiere die Funktion zum Markieren eines Todos als erledigt
+
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+    if (todoIndex !== -1) {
+        todos[todoIndex].completed = !todos[todoIndex].completed;
+    } else {
+        console.error('Todo nicht gefunden');
+    }
+    renderTodoList(); // Aktualisiere die Todo-Liste
 }
 
 /**
@@ -206,6 +281,13 @@ function toggleTodoComplete(todoId) {
  */
 function deleteTodo(todoId) {
     // TODO: Implementiere die Funktion zum Löschen eines Todos
+
+    const confirmDelete = confirm('Möchten Sie dieses Todo wirklich löschen?');
+    if (confirmDelete) {
+        // Entferne das Todo aus dem Array mit filter()
+        todos = todos.filter(todo => todo.id !== todoId); // gibt ein neues Array zurück[6][9][10]
+        renderTodoList(); // Aktualisiere die Todo-Liste
+    }
 }
 
 /**
@@ -226,6 +308,12 @@ function deleteTodo(todoId) {
  */
 function isOverdue(dateString) {
     // TODO: Implementiere die Funktion zum Prüfen, ob ein Datum in der Vergangenheit liegt
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Setze die Uhrzeit auf Mitternacht
+    const deadlineDate = new Date(dateString);
+    return deadlineDate < today; // Vergleiche die Daten
+
 }
 
 /**
@@ -244,6 +332,13 @@ function isOverdue(dateString) {
  */
 function formatDate(dateString) {
     // TODO: Implementiere die Funktion zum Formatieren eines Datums
+
+    const date = new Date(dateString);
+    return date.toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 }
 
 // App initialisieren, wenn das DOM geladen ist
