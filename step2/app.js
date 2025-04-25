@@ -123,7 +123,13 @@ function setActiveNavItem(activeNavItem) {
 function setupTodoForm() {
     // TODO: Implementiere den Event-Listener für das Formular
     // Der Listener soll das Standardverhalten verhindern und logNewTodo() aufrufen
+    todoForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        logNewTodo();
+        todoForm.reset();
+    });
 }
+
 
 /**
  * Neues Todo in die Konsole loggen
@@ -148,6 +154,20 @@ function setupTodoForm() {
  */
 function logNewTodo() {
     // TODO: Implementiere die Funktion zum Erstellen und Loggen eines neuen Todos
+    const tilte = document.getElementById('todo-title').value.trim();
+    const deadline = document.getElementById('todo-deadline').value.trim();
+    const assignee = document.getElementById('todo-assignee').value.trim();
+
+    const newToDo = 
+    {
+        id: Date.now(),
+        title: tilte,
+        assignee: assignee,
+        deadline: deadline,
+        completed: false,
+        createdAt: new Date().toISOString()
+    }
+    console.log(newToDo);
 }
 
 // App initialisieren, wenn das DOM geladen ist
