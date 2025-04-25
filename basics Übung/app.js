@@ -9,11 +9,15 @@ const checkButton = document.getElementById('checkButton');
 checkButton.addEventListener('click', function () {
     console.log(ageInput.value);
     inputSection.classList.add("hidden");
-    const age = ageInput.value;
+    const age = parseInt(ageInput.value);
     const isAllowed = checkEntryTime(age);
     console.log(isAllowed);
     showResult(age, isAllowed);
     ageInput.value = "";
+    if (isNaN(age)) {
+        alert('Bitte gib ein gültiges Alter ein.')
+        return;
+    }
 });
 
 ageInput.addEventListener('change', function () {
@@ -52,7 +56,7 @@ function showResult(age, isAllowed) {
     let altersgruppe;
     let resultHtml;
     if (!age) {
-        resultHtml="ungültig";
+        resultHtml = "ungültig";
         foramtResultHtml(resultHtml, altersgruppe);
         return;
     }
@@ -66,14 +70,13 @@ function showResult(age, isAllowed) {
     else {
         altersgruppe = "adult";
     }
-    
+
 
 
     if (isAllowed) {
         resultHtml = "yeeey du darfst rein";
     }
-    else
-    {
+    else {
         resultHtml = "nöööööööö";
     }
 
@@ -82,8 +85,7 @@ function showResult(age, isAllowed) {
     foramtResultHtml(resultHtml, altersgruppe);
 }
 
-function foramtResultHtml(resultHtml, altersgruppe)
-{
+function foramtResultHtml(resultHtml, altersgruppe) {
     resultHtml = `<div class="${altersgruppe}">${resultHtml}</div>`;
     console.log("ich bin im showresulte " + resultHtml);
     resultSection.innerHTML = resultHtml;
