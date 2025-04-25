@@ -153,7 +153,7 @@ function renderTodoList() {
     // TODO: Implementiere die Funktion zum Anzeigen der Todo-Liste
 
     todoList.innerHTML = ''; // Liste leeren
-    if (todos.length === 0) {
+    if (todos?.length === 0) {  //Fehleranfälliger als die Lösung in Step 4
         const message = document.createElement('p');
         message.textContent = 'Keine Todos vorhanden.';
         todoList.appendChild(message);

@@ -122,6 +122,17 @@ function setupTodoForm() {
  */
 function validateForm() {
     // TODO: Implementiere die Formularvalidierung
+
+    let valid = true;
+
+    // Titel validieren
+    const title = todoTitleInput.value.trim();
+    if (title === '') {
+        showError(todoTitleInput, titleError, 'Bitte Titel eingeben.');
+        valid = false;
+    }
+    // Verantwortlichen validieren
+    
 }
 
 /**
