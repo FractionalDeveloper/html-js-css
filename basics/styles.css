@@ -1,0 +1,78 @@
+/* Grundlegende Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    /* Füge hier deine Styles hinzu */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+label {
+    display: block; 
+    margin-bottom: 10px; 
+    font-weight: bold; 
+}
+
+input {
+    width: 80%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+}
+
+button {
+    background-color: #b209d4; 
+    color: white; 
+    padding: 10px 20px; 
+    border: 4px solid #750593;
+    border-radius: 4px; 
+}
+
+/* Styles für verschiedene Altersgruppen */
+.child {
+    /* Styles für Kinder unter 12 */
+    background-color: #7de9f7; 
+    color: #00838f;
+}
+
+.teen {
+    /* Styles für Jugendliche 12-17 */
+    background-color: #f9f58d; 
+    color: #e89b1e;
+}
+
+.adult {
+    /* Styles für Erwachsene 18+ */
+    background-color: #a6f790; 
+    color: #388e3c;
+}
+
+/* Styles für Ergebnis-Anzeige */
+.allowed {
+    /* Styles für erlaubten Eintritt */
+    background-color: lightgreen;
+    color: green;
+    font-weight: bold;
+
+}
+
+.denied {
+    /* Styles für verweigerten Eintritt */
+    background-color:lightcoral;
+    color: red;
+    font-weight: bold;
+}
