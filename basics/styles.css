@@ -9,6 +9,11 @@ body {
     /*vh = view-hide */
     margin: 0;
     padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
@@ -44,7 +49,9 @@ body {
 
 /* Styles für Ergebnis-Anzeige */
 .allowed {
-    /* Styles für erlaubten Eintritt */
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .denied {
