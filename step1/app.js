@@ -32,6 +32,18 @@ function initApp() {
 function setupNavigation() {
     // TODO: Implementiere die Navigation zwischen den Seiten
     // Hinweis: Du brauchst Event-Listener für die Navbar-Links
+
+    navAgeCheck.addEventListener('click', function(event) {
+        event.preventDefault(); // Verhindert das Standardverhalten des Links
+        showPage(ageCheckPage); // Zeigt die Altersprüfungsseite an
+        setActiveNavItem(navAgeCheck); // Hebt den Altersprüfungs-Link hervor
+    });
+
+    navTodo.addEventListener('click', function(event) {
+        event.preventDefault(); // Verhindert das Standardverhalten des Links
+        showPage(todoPage); // Zeigt die ToDo-App-Seite an
+        setActiveNavItem(navTodo); // Hebt den ToDo-App-Link hervor
+    });
 }
 
 /**
@@ -54,6 +66,14 @@ function setupNavigation() {
  */
 function showPage(pageToShow) {
     // TODO: Implementiere das Ein- und Ausblenden der Seiten
+    const pages = document.querySelectorAll('.page'); // Alle Seiten finden
+    pages.forEach(page => {
+        page.classList.add('hidden'); // Alle Seiten ausblenden
+
+        if (page === pageToShow) {
+            page.classList.remove('hidden'); // Die ausgewählte Seite anzeigen
+        }
+    });
 }
 
 /**
@@ -74,6 +94,14 @@ function showPage(pageToShow) {
  */
 function setActiveNavItem(activeNavItem) {
     // TODO: Implementiere die Hervorhebung des aktiven Menüpunkts
+    const navItems = document.querySelectorAll('.navbar-link'); // Alle Navigationspunkte finden
+    navItems.forEach(item => {
+        item.classList.remove('active'); // Klasse "active" von allen entfernen
+
+        if (item === activeNavItem) {
+            item.classList.add('active'); // Klasse "active" zum aktiven Punkt hinzufügen
+        }
+    });
 }
 
 // App initialisieren, wenn das DOM geladen ist

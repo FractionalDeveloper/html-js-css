@@ -40,9 +40,14 @@ body {
     margin-left: 20px;
 }
 
-.navbar-link {
+.navbar-link{
     color: white;
     text-decoration: none;
+}
+
+.navbar-link.active {
+    color: crimson;
+    font-weight: bold;
 }
 
 /* Seiten Styles */
@@ -53,6 +58,8 @@ body {
 .hidden {
     display: none;
 }
+
+
 
 /* Container Styles (bereits vorhanden) */
 .container {
