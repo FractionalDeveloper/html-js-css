@@ -72,3 +72,7 @@ h1 {
 }
 
 /* Hier kommen später weitere Styles */
+
+.navbar-link.active {
+    color: greenyellow;
+}

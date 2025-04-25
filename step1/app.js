@@ -32,6 +32,17 @@ function initApp() {
 function setupNavigation() {
     // TODO: Implementiere die Navigation zwischen den Seiten
     // Hinweis: Du brauchst Event-Listener für die Navbar-Links
+
+    navAgeCheck.addEventListener('click', function (event) {
+        event.preventDefault();
+        showPage(ageCheckPage);
+        setActiveNavItem(navAgeCheck);
+    });
+    navTodo.addEventListener('click', function (event) {
+        event.preventDefault();
+        showPage(todoPage);
+        setActiveNavItem(navTodo);
+    });
 }
 
 /**
@@ -54,6 +65,15 @@ function setupNavigation() {
  */
 function showPage(pageToShow) {
     // TODO: Implementiere das Ein- und Ausblenden der Seiten
+    const allpages = document.querySelectorAll('.page');
+    allpages.forEach(page => {
+        page.classList.add('hidden');
+
+        if(page === pageToShow)
+        {
+            page.classList.remove('hidden');
+        }
+    });
 }
 
 /**
@@ -74,6 +94,14 @@ function showPage(pageToShow) {
  */
 function setActiveNavItem(activeNavItem) {
     // TODO: Implementiere die Hervorhebung des aktiven Menüpunkts
+    const navItems = document.querySelectorAll('.navbar-link');
+    navItems.forEach(item =>{
+        item.classList.remove('active');
+        if(item === activeNavItem)
+        {
+            item.classList.add('active');
+        }
+    });
 }
 
 // App initialisieren, wenn das DOM geladen ist
