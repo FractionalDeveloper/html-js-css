@@ -18,10 +18,10 @@ let todos = [];
 function initApp() {
     // Event-Listener für die Navigation
     setupNavigation();
-    
+
     // Event-Listener für das Todo-Formular
     setupTodoForm();
-    
+
     // Todos anzeigen
     renderTodoList();
 }
@@ -31,14 +31,14 @@ function initApp() {
  */
 function setupNavigation() {
     // Event-Listener für die Altersprüfung
-    navAgeCheck.addEventListener('click', function(e) {
+    navAgeCheck.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(ageCheckPage);
         setActiveNavItem(navAgeCheck);
     });
-    
+
     // Event-Listener für die ToDo-App
-    navTodo.addEventListener('click', function(e) {
+    navTodo.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(todoPage);
         setActiveNavItem(navTodo);
@@ -53,7 +53,7 @@ function showPage(pageToShow) {
     // Alle Seiten ausblenden
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.add('hidden'));
-    
+
     // Die ausgewählte Seite einblenden
     pageToShow.classList.remove('hidden');
 }
@@ -66,7 +66,7 @@ function setActiveNavItem(activeNavItem) {
     // Aktiven Status von allen Navigationspunkten entfernen
     const navItems = document.querySelectorAll('.navbar-link');
     navItems.forEach(item => item.classList.remove('active'));
-    
+
     // Aktiven Status zum ausgewählten Navigationspunkt hinzufügen
     activeNavItem.classList.add('active');
 }
@@ -75,9 +75,9 @@ function setActiveNavItem(activeNavItem) {
  * Event-Listener für das Todo-Formular einrichten
  */
 function setupTodoForm() {
-    todoForm.addEventListener('submit', function(e) {
+    todoForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Todo-Objekt erstellen
         addNewTodo();
     });
@@ -116,6 +116,19 @@ function setupTodoForm() {
  */
 function addNewTodo() {
     // TODO: Implementiere die Funktion zum Hinzufügen eines neuen Todos
+    const newTodo = {
+        id: Date.now(),
+        title: todoTitleInput.value.trim(),
+        assignee: todoAssigneeInput.value.trim(),
+        deadline: todoDeadlineInput.value.trim(),
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+
+    todos.push(newTodo);
+    renderTodoList();
+    todoForm.reset();
+    console.log(newTodo);
 }
 
 /**
@@ -137,6 +150,18 @@ function addNewTodo() {
  */
 function renderTodoList() {
     // TODO: Implementiere die Funktion zum Anzeigen der Todo-Liste
+    todoList.innerHTML = '';
+    if (!todoList) {
+        const message = document.createElement('p');
+        message.textContent = 'Keine ToDo´s vorhanden';
+        todoList.appendChild(message);
+        return;
+    }
+
+    todos.forEach(todo => {
+        const todoElement = createTodoElement(todo);
+        todoList.appendChild(todoElement);
+    })
 }
 
 /**
@@ -167,6 +192,45 @@ function renderTodoList() {
  */
 function createTodoElement(todo) {
     // TODO: Implementiere die Funktion zum Erstellen eines Todo-Elements
+    const todoItem = document.createElement('li');
+    todoItem.classList.add('todo-item');
+    if (todo.completed) {
+        todoItem.classList.add('completed');
+    }
+    if (isOverdue(todo.deadline)) {
+        todoItem.classList.add('overdue');
+    }
+
+    const titleSpan = document.createElement('span');
+    titleSpan.classList.add('todo-title');
+    titleSpan.textContent = todo.title;
+
+    const assigneeSpan = document.createElement('span');
+    assigneeSpan.classList.add('todo-assignee');
+    assigneeSpan.textContent = todo.assignee;
+
+    const deadlineSpan = document.createElement('span');
+    deadlineSpan.classList.add('todo-deadline');
+    deadlineSpan.textContent = formatDate(todo.deadline);
+
+    const deletebtn = document.createElement('button');
+    deletebtn.classList.add('delete-btn');
+    deletebtn.textContent = 'Löschen';
+
+    const completebtn = document.createElement('button');
+    completebtn.classList.add('complete-btn');
+    completebtn.textContent = 'Erledigt';
+
+    completebtn.addEventListener('click', () => toggleTodoComplete(todo.id));
+    deletebtn.addEventListener('click', () => deleteTodo(todo.id));
+
+    todoItem.appendChild(titleSpan);
+    todoItem.appendChild(assigneeSpan);
+    todoItem.appendChild(deadlineSpan);
+    todoItem.appendChild(deletebtn);
+    todoItem.appendChild(completebtn);
+
+    return todoItem;
 }
 
 /**
@@ -186,6 +250,14 @@ function createTodoElement(todo) {
  */
 function toggleTodoComplete(todoId) {
     // TODO: Implementiere die Funktion zum Markieren eines Todos als erledigt
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+    if (todoIndex !== -1){
+        todos[todoIndex].completed = !todos[todoIndex].completed;
+    }
+    else {
+        console.error('Error - Keine ToDo´s gefunden');
+    }
+    renderTodoList();
 }
 
 /**
@@ -206,6 +278,12 @@ function toggleTodoComplete(todoId) {
  */
 function deleteTodo(todoId) {
     // TODO: Implementiere die Funktion zum Löschen eines Todos
+    const confirmdelete = confirm('Möchten Sie dieses ToDo wirklich löschen?')
+    if(confirmdelete)
+    {
+        todos = todos.filter(todo => todo.id !== todoId)
+    }
+    renderTodoList();
 }
 
 /**
@@ -226,6 +304,10 @@ function deleteTodo(todoId) {
  */
 function isOverdue(dateString) {
     // TODO: Implementiere die Funktion zum Prüfen, ob ein Datum in der Vergangenheit liegt
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const date = new Date(dateString);
+    return date < today;
 }
 
 /**
@@ -244,6 +326,12 @@ function isOverdue(dateString) {
  */
 function formatDate(dateString) {
     // TODO: Implementiere die Funktion zum Formatieren eines Datums
+    const dateformat = new Date(dateString);
+    return dateformat.toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 }
 
 // App initialisieren, wenn das DOM geladen ist
