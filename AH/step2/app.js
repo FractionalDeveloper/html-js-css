@@ -162,9 +162,9 @@ function logNewTodo() {
 
     const newTodo = {
         id: Date.now(),
-        titel: title,
-        verantwortlicher: assignee,
-        faelligkeit: deadline,
+        titel: todoTitleInput,
+        verantwortlicher: todoAssigneeInput,
+        faelligkeit: todoDeadlineInput,
         erledigt: false,
         erstelltAm: new Date().toISOString()
     };
