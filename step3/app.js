@@ -217,12 +217,12 @@ function createTodoElement(todo) {
     deadlineSpan.textContent = formatDate(todo.deadline);
 
     const completeButton = document.createElement('button');
-    completeButton.classList.add('todo-complete-button');
+    completeButton.classList.add('complete-btn');
     completeButton.textContent = 'Erledigt';
     completeButton.addEventListener('click', () => toggleTodoComplete(todo.id));
 
     const deleteButton = document.createElement('button');
-    deleteButton.classList.add('todo-delete-button');
+    deleteButton.classList.add('delete-btn');
     deleteButton.textContent = 'Löschen';
     deleteButton.addEventListener('click', () => deleteTodo(todo.id));
 
@@ -279,12 +279,14 @@ function toggleTodoComplete(todoId) {
  * 
  * Ressource: https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
  */
+
+
+
 function deleteTodo(todoId) {
     // TODO: Implementiere die Funktion zum Löschen eines Todos
 
-    const confirmDelete = confirm('Möchten Sie dieses Todo wirklich löschen?');
+    const confirmDelete = confirm('Möchten Sie dieses Todo wirklich löschen? (Ja/Nein)'); // Replace confirm with prompt
     if (confirmDelete) {
-        // Entferne das Todo aus dem Array mit filter()
         todos = todos.filter(todo => todo.id !== todoId); // gibt ein neues Array zurück[6][9][10]
         renderTodoList(); // Aktualisiere die Todo-Liste
     }
