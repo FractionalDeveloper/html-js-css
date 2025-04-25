@@ -66,14 +66,8 @@ function setupNavigation() {
 function showPage(pageToShow) {
     // TODO: Implementiere das Ein- und Ausblenden der Seiten
     const allpages = document.querySelectorAll('.page');
-    allpages.forEach(page => {
-        page.classList.add('hidden');
-
-        if(page === pageToShow)
-        {
-            page.classList.remove('hidden');
-        }
-    });
+    allpages.forEach(page => page.classList.add('hidden'));
+    page.classList.remove('hidden');
 }
 
 /**
@@ -95,13 +89,8 @@ function showPage(pageToShow) {
 function setActiveNavItem(activeNavItem) {
     // TODO: Implementiere die Hervorhebung des aktiven Menüpunkts
     const navItems = document.querySelectorAll('.navbar-link');
-    navItems.forEach(item =>{
-        item.classList.remove('active');
-        if(item === activeNavItem)
-        {
-            item.classList.add('active');
-        }
-    });
+    navItems.forEach(item => item.classList.remove('active'));
+    item.classList.add('active');
 }
 
 // App initialisieren, wenn das DOM geladen ist
