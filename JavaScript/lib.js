@@ -17,10 +17,7 @@ function zeigeErgebnisse() {
 }
 
 
-function wahl() {
-    console.log("UND Verknüpfung" + (istWahr && istFalsch) + " links müsste falsch rauskommen")
-    console.log("ODER Verknüpfung" + (istWahr || istFalsch) + " links müsste richtig rauskommen")
-}
+
 
 // Station 3: Booleans
 let istWahr = true;
@@ -28,8 +25,22 @@ let istFalsch = false;
 console.log(istWahr && istFalsch); // UND
 console.log(istWahr || istFalsch); // ODER
 
+function wahl() {
+    console.log("UND Verknüpfung" + (istWahr && istFalsch) + " links müsste falsch rauskommen")
+    console.log("ODER Verknüpfung" + (istWahr || istFalsch) + " links müsste richtig rauskommen")
+}
+
 // Station 4: Arrays
 
 let farben = ["rot", "grün", "blau"];
 console.log(farben[0]); // Erstes Element
 farben.push("gelb"); // Neues Element hinzufügen
+
+function fügeFarbeHinzu() {
+
+    let inputFeld = document.getElementById("inputForColours");
+    farben.push(inputFeld.value);
+    console.log(farben);
+}
+
+//semikolons sind optional

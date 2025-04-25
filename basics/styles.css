@@ -1,12 +1,24 @@
 /* Grundlegende Stile */
 body {
     font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /*vh = view-hide */
     margin: 0;
     padding: 0;
 }
 
 .container {
-    /* Füge hier deine Styles hinzu */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
 }
 
 .hidden {
@@ -15,14 +27,18 @@ body {
 
 /* Styles für verschiedene Altersgruppen */
 .child {
+    background-color: green;
     /* Styles für Kinder unter 12 */
 }
 
 .teen {
+    background-color: #e3f2fd;
+    ;
     /* Styles für Jugendliche 12-17 */
 }
 
 .adult {
+    background-color: ;
     /* Styles für Erwachsene 18+ */
 }
 
