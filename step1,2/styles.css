@@ -1,0 +1,186 @@
+/* Reset und allgemeine Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding-top: 60px; /* Platz für die Navbar */
+}
+
+/* Vollständige Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-item {
+    margin-left: 20px;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navbar-link:hover {
+    background-color: #555;
+}
+
+.navbar-link.active {
+    background-color: #4CAF50;
+}
+
+/* Seiten Styles */
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: calc(100vh - 60px); /* Volle Höhe minus Navbar */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Container Styles (bereits vorhanden) */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #555;
+    margin: 20px 0;
+    font-size: 1.2rem;
+}
+
+/* Grundlegende Todo Form Styles */
+.todo-form {
+    margin-bottom: 30px;
+    text-align: left;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#add-todo-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+#add-todo-btn:hover {
+    background-color: #45a049;
+}
+
+/* Minimale Todo List Styles */
+.todo-list-container {
+    text-align: left;
+}
+
+#todo-list {
+    list-style: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .navbar-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+    
+    .navbar-logo {
+        margin-bottom: 10px;
+    }
+    
+    .navbar-menu {
+        width: 100%;
+        justify-content: space-around;
+    }
+    
+    .navbar-item {
+        margin: 0;
+    }
+    
+    body {
+        padding-top: 100px;
+    }
+    
+    .page {
+        min-height: calc(100vh - 100px);
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}
