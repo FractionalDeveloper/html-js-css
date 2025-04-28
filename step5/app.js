@@ -219,6 +219,13 @@ function addNewTodo() {
  */
 function loadTodosFromLocalStorage() {
     // TODO: Implementiere das Laden der Todos aus dem LocalStorage
+    const todosFromStorage = localStorage.getItem('todos');
+    if (todosFromStorage) {
+        todos = JSON.parse(todosFromStorage);
+    }
+    else {
+        todos = [];
+    }
 }
 
 /**
@@ -238,6 +245,8 @@ function loadTodosFromLocalStorage() {
  */
 function saveTodosToLocalStorage() {
     // TODO: Implementiere das Speichern der Todos im LocalStorage
+    const jsonString = JSON.stringify(todos);
+    localStorage.setItem('todos', jsonString);
 }
 
 /**
