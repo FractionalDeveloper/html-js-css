@@ -151,7 +151,7 @@ function addNewTodo() {
 function renderTodoList() {
     // TODO: Implementiere die Funktion zum Anzeigen der Todo-Liste
     todoList.innerHTML = '';
-    if (!todoList) {
+    if (todos?.length === 0) {
         const message = document.createElement('p');
         message.textContent = 'Keine ToDo´s vorhanden';
         todoList.appendChild(message);
@@ -197,7 +197,7 @@ function createTodoElement(todo) {
     if (todo.completed) {
         todoItem.classList.add('completed');
     }
-    if (isOverdue(todo.deadline)) {
+    else if (isOverdue(todo.deadline)) {
         todoItem.classList.add('overdue');
     }
 

@@ -23,10 +23,10 @@ let todos = [];
 function initApp() {
     // Event-Listener für die Navigation
     setupNavigation();
-    
+
     // Event-Listener für das Todo-Formular
     setupTodoForm();
-    
+
     // Todos anzeigen
     renderTodoList();
 }
@@ -36,14 +36,14 @@ function initApp() {
  */
 function setupNavigation() {
     // Event-Listener für die Altersprüfung
-    navAgeCheck.addEventListener('click', function(e) {
+    navAgeCheck.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(ageCheckPage);
         setActiveNavItem(navAgeCheck);
     });
-    
+
     // Event-Listener für die ToDo-App
-    navTodo.addEventListener('click', function(e) {
+    navTodo.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(todoPage);
         setActiveNavItem(navTodo);
@@ -58,7 +58,7 @@ function showPage(pageToShow) {
     // Alle Seiten ausblenden
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.add('hidden'));
-    
+
     // Die ausgewählte Seite einblenden
     pageToShow.classList.remove('hidden');
 }
@@ -71,7 +71,7 @@ function setActiveNavItem(activeNavItem) {
     // Aktiven Status von allen Navigationspunkten entfernen
     const navItems = document.querySelectorAll('.navbar-link');
     navItems.forEach(item => item.classList.remove('active'));
-    
+
     // Aktiven Status zum ausgewählten Navigationspunkt hinzufügen
     activeNavItem.classList.add('active');
 }
@@ -80,9 +80,9 @@ function setActiveNavItem(activeNavItem) {
  * Event-Listener für das Todo-Formular einrichten
  */
 function setupTodoForm() {
-    todoForm.addEventListener('submit', function(e) {
+    todoForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Formular validieren und bei Erfolg ein neues Todo erstellen
         if (validateForm()) {
             addNewTodo();
@@ -122,6 +122,33 @@ function setupTodoForm() {
  */
 function validateForm() {
     // TODO: Implementiere die Formularvalidierung
+    const valid = true;
+
+    title = todoTitleInput.value.trim();
+    assignee = todoAssigneeInput.value.trim();
+    deadline = todoDeadlineInput.value;
+
+    if (!title) {
+        showError(todoTitleInput, titleError, 'Bitte Title eingeben');
+        valid = false;
+    }
+    if (!assignee) {
+        showError(todoAssigneeInput, assigneeError, 'Verantwortlichen angeben');
+        valid = false;
+    }
+    if (!deadline) {
+        showError(todoDeadlineInput, deadlineError, 'Gültiges Datum auswählen');
+        valid = false;
+    }
+    else {
+        const today = new Date();
+        const selectedDate = new Date(deadline);
+        if (selectedDate < today) {
+            showError(todoDeadlineInput, deadlineError, 'Das Datum darf nicht in der Vergangenheit liegen');
+            valid = false;
+        }
+    }
+    return valid;
 }
 
 /**
@@ -145,6 +172,13 @@ function validateForm() {
  */
 function showError(inputElement, errorElement, message) {
     // TODO: Implementiere die Anzeige von Fehlermeldungen
+    inputElement.classList.add('error');
+    errorElement.textContent = message;
+    errorElement.classList.add('shake');
+    
+    setTimeout(() => {
+        errorElement.classList.remove('shake');
+    }, 500);
 }
 
 /**
@@ -164,6 +198,8 @@ function showError(inputElement, errorElement, message) {
  */
 function clearError(inputElement, errorElement) {
     // TODO: Implementiere das Löschen von Fehlermeldungen
+    inputElement.classList.remove('error');
+    errorElement.textContent = '';
 }
 
 /**
@@ -174,7 +210,7 @@ function addNewTodo() {
     const title = todoTitleInput.value.trim();
     const assignee = todoAssigneeInput.value.trim();
     const deadline = todoDeadlineInput.value;
-    
+
     // Neues Todo-Objekt erstellen
     const newTodo = {
         id: Date.now(), // Eindeutige ID anhand des aktuellen Zeitstempels
@@ -184,16 +220,16 @@ function addNewTodo() {
         completed: false,
         createdAt: new Date().toISOString()
     };
-    
+
     // Todo zum Array hinzufügen
     todos.push(newTodo);
-    
+
     // Todo in der Liste anzeigen
     renderTodoList();
-    
+
     // Formularfelder zurücksetzen
     todoForm.reset();
-    
+
     // Optional: Das neue Todo in der Konsole ausgeben
     console.log('Neues Todo erstellt:', newTodo);
 }
@@ -204,13 +240,13 @@ function addNewTodo() {
 function renderTodoList() {
     // Todo-Liste leeren
     todoList.innerHTML = '';
-    
+
     // Wenn keine Todos vorhanden sind, eine Meldung anzeigen
     if (todos.length === 0) {
         todoList.innerHTML = '<li class="empty-message">Keine Aufgaben vorhanden. Erstelle deine erste Aufgabe!</li>';
         return;
     }
-    
+
     // Todos durchlaufen und anzeigen
     todos.forEach(todo => {
         const todoItem = createTodoElement(todo);
@@ -227,16 +263,16 @@ function createTodoElement(todo) {
     // Neues Listenelement erstellen
     const li = document.createElement('li');
     li.className = 'todo-item';
-    
+
     // Klassen basierend auf dem Status hinzufügen
     if (todo.completed) {
         li.classList.add('completed');
     } else if (isOverdue(todo.deadline)) {
         li.classList.add('overdue');
     }
-    
+
     // HTML für das Todo-Element
-    li.innerHTML = 
+    li.innerHTML =
         `<div class="todo-info">
             <div class="todo-title">${todo.title}</div>
             <div class="todo-details">
@@ -248,15 +284,15 @@ function createTodoElement(todo) {
             <button class="complete-btn">${todo.completed ? 'Wiederherstellen' : 'Erledigt'}</button>
             <button class="delete-btn">Löschen</button>
         </div>`;
-    
+
     // Event-Listener für den "Erledigt"-Button
     const completeBtn = li.querySelector('.complete-btn');
     completeBtn.addEventListener('click', () => toggleTodoComplete(todo.id));
-    
+
     // Event-Listener für den "Löschen"-Button
     const deleteBtn = li.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', () => deleteTodo(todo.id));
-    
+
     return li;
 }
 
@@ -267,11 +303,11 @@ function createTodoElement(todo) {
 function toggleTodoComplete(todoId) {
     // Index des Todos im Array finden
     const todoIndex = todos.findIndex(todo => todo.id === todoId);
-    
+
     // Status des Todos umkehren
     if (todoIndex !== -1) {
         todos[todoIndex].completed = !todos[todoIndex].completed;
-        
+
         // Todo-Liste aktualisieren
         renderTodoList();
     }
@@ -286,7 +322,7 @@ function deleteTodo(todoId) {
     if (confirm('Möchtest du diese Aufgabe wirklich löschen?')) {
         // Todo aus dem Array entfernen
         todos = todos.filter(todo => todo.id !== todoId);
-        
+
         // Todo-Liste aktualisieren
         renderTodoList();
     }
@@ -300,9 +336,9 @@ function deleteTodo(todoId) {
 function isOverdue(dateString) {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Uhrzeit auf 00:00:00 setzen
-    
+
     const deadline = new Date(dateString);
-    
+
     return deadline < today;
 }
 
