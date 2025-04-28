@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Web-App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigationleiste -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="navbar-logo">Meine Web-App</h1>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" id="nav-age-check" class="navbar-link">Altersprüfung</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" id="nav-todo" class="navbar-link">ToDo App</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Container für die Altersprüfung -->
+    <div id="age-check-page" class="page hidden">
+        <div class="container">
+            <h1>Altersgerechte Eintrittskontrolle</h1>
+            
+            <div id="inputSection">
+                <label for="ageInput">Bitte gib dein Alter ein:</label>
+                <input type="number" id="ageInput" min="1" max="120">
+                <button id="checkButton">Überprüfen</button>
+            </div>
+            
+            <div id="resultSection" class="hidden">
+                <!-- Hier wird das Ergebnis angezeigt -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Container für die ToDo App -->
+    <div id="todo-page" class="page hidden">
+        <div class="container">
+            <h1>Meine ToDo Liste</h1>
+            
+            <!-- Formular zum Erstellen neuer Todos -->
+            <div class="todo-form">
+                <h2>Neue Aufgabe erstellen</h2>
+                <form id="new-todo-form" novalidate>
+                    <div class="form-group">
+                        <label for="todo-title">Aufgabe:</label>
+                        <input type="text" id="todo-title" placeholder="Was muss erledigt werden?" required>
+                        <div class="error-message" id="title-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="todo-assignee">Verantwortlich:</label>
+                        <input type="text" id="todo-assignee" placeholder="Wer soll es erledigen?" required>
+                        <div class="error-message" id="assignee-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="todo-deadline">Fälligkeitsdatum:</label>
+                        <input type="date" id="todo-deadline" required>
+                        <div class="error-message" id="deadline-error"></div>
+                    </div>
+                    
+                    <button type="submit" id="add-todo-btn">Erstellen</button>
+                </form>
+            </div>
+            
+            <!-- Liste der Todos -->
+            <div class="todo-list-container">
+                <h2>Meine Aufgaben</h2>
+                <ul id="todo-list">
+                    <!-- Todos werden hier dynamisch eingefügt -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript-Dateien einbinden -->
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
