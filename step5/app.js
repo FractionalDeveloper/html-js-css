@@ -219,6 +219,20 @@ function addNewTodo() {
  */
 function loadTodosFromLocalStorage() {
     // TODO: Implementiere das Laden der Todos aus dem LocalStorage
+    try {
+        const storedTodos = localStorage.getItem(STORAGE_KEY);
+
+        if (storedTodos) {
+            todos = JSON.parse(storedTodos);
+            console.log("Todos geladen", todos.length);
+            
+        } else {
+            console.log("Keine Daten gefunden")
+            todos = [];
+        }
+    } catch (error) {
+        console.log("Fehler beim laden der Daten")
+    }
 }
 
 /**
@@ -238,6 +252,13 @@ function loadTodosFromLocalStorage() {
  */
 function saveTodosToLocalStorage() {
     // TODO: Implementiere das Speichern der Todos im LocalStorage
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+        console.log("Todos gespeichert", todos)
+        
+    } catch (error) {
+        console.log("Fehler beim speichern")
+    }   
 }
 
 /**
