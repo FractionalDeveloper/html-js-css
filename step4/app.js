@@ -122,11 +122,11 @@ function setupTodoForm() {
  */
 function validateForm() {
     // TODO: Implementiere die Formularvalidierung
-    const valid = true;
+    let valid = true;
 
-    title = todoTitleInput.value.trim();
-    assignee = todoAssigneeInput.value.trim();
-    deadline = todoDeadlineInput.value;
+    const title = todoTitleInput.value.trim();
+    const assignee = todoAssigneeInput.value.trim();
+    const deadline = todoDeadlineInput.value;
 
     if (!title) {
         showError(todoTitleInput, titleError, 'Bitte Title eingeben');
