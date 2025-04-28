@@ -29,19 +29,19 @@ const STORAGE_KEY = 'todos';
 function initApp() {
     // Event-Listener für die Navigation
     setupNavigation();
-    
+
     // Event-Listener für das Todo-Formular
     setupTodoForm();
-    
+
     // Event-Listener für Datei-Upload
     setupFileUpload();
-    
+
     // Todos aus dem LocalStorage laden
     loadTodosFromLocalStorage();
-    
+
     // Todos anzeigen
     renderTodoList();
-    
+
     // Standardmäßig die Todo-App anzeigen
     showPage(todoPage);
     setActiveNavItem(navTodo);
@@ -50,14 +50,14 @@ function initApp() {
 // Event-Listener für die Navigation einrichten
 function setupNavigation() {
     // Event-Listener für die Altersprüfung
-    navAgeCheck.addEventListener('click', function(e) {
+    navAgeCheck.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(ageCheckPage);
         setActiveNavItem(navAgeCheck);
     });
-    
+
     // Event-Listener für die ToDo-App
-    navTodo.addEventListener('click', function(e) {
+    navTodo.addEventListener('click', function (e) {
         e.preventDefault();
         showPage(todoPage);
         setActiveNavItem(navTodo);
@@ -69,7 +69,7 @@ function showPage(pageToShow) {
     // Alle Seiten ausblenden
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => page.classList.add('hidden'));
-    
+
     // Die ausgewählte Seite einblenden
     pageToShow.classList.remove('hidden');
 }
@@ -79,16 +79,16 @@ function setActiveNavItem(activeNavItem) {
     // Aktiven Status von allen Navigationspunkten entfernen
     const navItems = document.querySelectorAll('.navbar-link');
     navItems.forEach(item => item.classList.remove('active'));
-    
+
     // Aktiven Status zum ausgewählten Navigationspunkt hinzufügen
     activeNavItem.classList.add('active');
 }
 
 // Event-Listener für das Todo-Formular einrichten
 function setupTodoForm() {
-    todoForm.addEventListener('submit', function(e) {
+    todoForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Formular validieren und bei Erfolg ein neues Todo erstellen
         if (validateForm()) {
             addNewTodo();
@@ -99,7 +99,7 @@ function setupTodoForm() {
     todoTitleInput.addEventListener('input', () => clearError(todoTitleInput, titleError));
     todoAssigneeInput.addEventListener('input', () => clearError(todoAssigneeInput, assigneeError));
     todoDeadlineInput.addEventListener('input', () => clearError(todoDeadlineInput, deadlineError));
-    
+
     // Aktuelles Datum als Standardwert für das Datumsfeld setzen
     const today = new Date().toISOString().split('T')[0];
     todoDeadlineInput.min = today;
@@ -116,6 +116,17 @@ function setupTodoForm() {
  */
 function setupFileUpload() {
     // TODO: Implementiere den Event-Listener für das Datei-Upload-Feld
+    todoFileInput.addEventListener('change', function () {
+        const file = todoFileInput.files[0];
+        if (file) {
+            fileInfo.textContent = `Ausgewählte Datei: ${file.name}`;
+            fileInfo.classList.remove('hidden');
+        }
+        else {
+            fileInfo.textContent = '';
+            fileInfo.classList.add('hidden')
+        }
+    })
 }
 
 /**
@@ -130,12 +141,24 @@ function setupFileUpload() {
  */
 function fileToBase64(file) {
     // TODO: Implementiere die Konvertierung einer Datei zu Base64
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64String = reader.result.split(',')[1];
+            resolve(base64String);
+        };
+        reader.onerror = (error) => {
+            console.error('Fehler beim Konvertieren der Datei zu Base64: ', error);
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 // Formular validieren
 function validateForm() {
     let valid = true;
-    
+
     // Titel validieren
     const title = todoTitleInput.value.trim();
     if (!title) {
@@ -145,14 +168,14 @@ function validateForm() {
         showError(todoTitleInput, titleError, 'Der Titel muss mindestens 3 Zeichen lang sein');
         valid = false;
     }
-    
+
     // Verantwortlichen validieren
     const assignee = todoAssigneeInput.value.trim();
     if (!assignee) {
         showError(todoAssigneeInput, assigneeError, 'Bitte gib einen Verantwortlichen ein');
         valid = false;
     }
-    
+
     // Fälligkeitsdatum validieren
     const deadline = todoDeadlineInput.value;
     if (!deadline) {
@@ -166,7 +189,7 @@ function validateForm() {
             valid = false;
         }
     }
-    
+
     // Datei validieren (optional)
     const file = todoFileInput.files[0];
     if (file) {
@@ -179,7 +202,7 @@ function validateForm() {
             valid = false;
         }
     }
-    
+
     return valid;
 }
 
@@ -187,18 +210,18 @@ function validateForm() {
 function showError(inputElement, errorElement, message) {
     // Klasse für Fehlerstil hinzufügen
     inputElement.classList.add('error');
-    
+
     // Fehlermeldung setzen
     errorElement.textContent = message;
-    
+
     // Animation für Feedback hinzufügen
     inputElement.classList.add('shake');
-    
+
     // Animation nach einer kurzen Zeit entfernen
     setTimeout(() => {
         inputElement.classList.remove('shake');
     }, 500);
-    
+
     // Fokus auf das Eingabefeld setzen
     inputElement.focus();
 }
@@ -207,7 +230,7 @@ function showError(inputElement, errorElement, message) {
 function clearError(inputElement, errorElement) {
     // Klasse für Fehlerstil entfernen
     inputElement.classList.remove('error');
-    
+
     // Fehlermeldung löschen
     errorElement.textContent = '';
 }
@@ -221,6 +244,12 @@ function clearError(inputElement, errorElement) {
  */
 function addNewTodo() {
     // TODO: Implementiere das Hinzufügen eines neuen Todos mit Dateianhang
+    const title = todoTitleInput.value.trim();
+    const assignee = todoAssigneeInput.value.trim();
+    const deadline = todoDeadlineInput.value;
+    const file = todoFileInput.files[0];
+
+    
 }
 
 // Todos aus dem LocalStorage laden
@@ -228,7 +257,7 @@ function loadTodosFromLocalStorage() {
     try {
         // Todos aus dem LocalStorage holen
         const storedTodos = localStorage.getItem(STORAGE_KEY);
-        
+
         // Wenn Todos vorhanden sind, in das Array laden
         if (storedTodos) {
             todos = JSON.parse(storedTodos);
@@ -251,7 +280,7 @@ function saveTodosToLocalStorage() {
         console.log('Todos im LocalStorage gespeichert:', todos.length);
     } catch (error) {
         console.error('Fehler beim Speichern der Todos im LocalStorage:', error);
-        
+
         // Fehlerbehandlung: Versuchen, den LocalStorage zu leeren
         if (error instanceof DOMException && error.name === 'QuotaExceededError') {
             alert('Der LocalStorage ist voll. Bitte lösche einige Todos, um Platz zu schaffen.');
@@ -263,13 +292,13 @@ function saveTodosToLocalStorage() {
 function renderTodoList() {
     // Todo-Liste leeren
     todoList.innerHTML = '';
-    
+
     // Wenn keine Todos vorhanden sind, eine Meldung anzeigen
     if (todos.length === 0) {
         todoList.innerHTML = '<li class="empty-message">Keine Aufgaben vorhanden. Erstelle deine erste Aufgabe!</li>';
         return;
     }
-    
+
     // Todos nach Fälligkeit und Status sortieren
     const sortedTodos = [...todos].sort((a, b) => {
         // Erledigte Todos ans Ende
@@ -287,7 +316,7 @@ function renderTodoList() {
         // Nach Fälligkeitsdatum sortieren
         return new Date(a.deadline) - new Date(b.deadline);
     });
-    
+
     // Todos durchlaufen und anzeigen
     sortedTodos.forEach(todo => {
         const todoItem = createTodoElement(todo);
@@ -325,17 +354,17 @@ function downloadFile(dataUrl, fileName) {
 function toggleTodoComplete(todoId) {
     // Index des Todos im Array finden
     const todoIndex = todos.findIndex(todo => todo.id === todoId);
-    
+
     // Status des Todos umkehren
     if (todoIndex !== -1) {
         todos[todoIndex].completed = !todos[todoIndex].completed;
-        
+
         // Todos im LocalStorage speichern
         saveTodosToLocalStorage();
-        
+
         // Todo-Liste aktualisieren
         renderTodoList();
-        
+
         // Erfolgsmeldung anzeigen
         const status = todos[todoIndex].completed ? 'erledigt' : 'wiederhergestellt';
         showSuccessMessage(`Aufgabe als ${status} markiert!`);
@@ -346,20 +375,20 @@ function toggleTodoComplete(todoId) {
 function deleteTodo(todoId) {
     // Todo-Objekt finden
     const todo = todos.find(todo => todo.id === todoId);
-    
+
     if (!todo) return;
-    
+
     // Nachfragen, ob das Todo wirklich gelöscht werden soll
     if (confirm(`Möchtest du die Aufgabe "${todo.title}" wirklich löschen?`)) {
         // Todo aus dem Array entfernen
         todos = todos.filter(todo => todo.id !== todoId);
-        
+
         // Todos im LocalStorage speichern
         saveTodosToLocalStorage();
-        
+
         // Todo-Liste aktualisieren
         renderTodoList();
-        
+
         // Erfolgsmeldung anzeigen
         showSuccessMessage('Aufgabe erfolgreich gelöscht!');
     }
@@ -372,7 +401,7 @@ function showSuccessMessage(message) {
     if (existingMessage) {
         existingMessage.remove();
     }
-    
+
     // Neue Meldung erstellen
     const messageElement = document.createElement('div');
     messageElement.className = 'success-message';
@@ -387,14 +416,14 @@ function showSuccessMessage(message) {
     messageElement.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
     messageElement.style.zIndex = '1000';
     messageElement.style.transition = 'opacity 0.5s';
-    
+
     // Meldung zum Dokument hinzufügen
     document.body.appendChild(messageElement);
-    
+
     // Meldung nach 3 Sekunden ausblenden
     setTimeout(() => {
         messageElement.style.opacity = '0';
-        
+
         // Meldung nach dem Ausblenden entfernen
         setTimeout(() => {
             messageElement.remove();
@@ -406,9 +435,9 @@ function showSuccessMessage(message) {
 function isOverdue(dateString) {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Uhrzeit auf 00:00:00 setzen
-    
+
     const deadline = new Date(dateString);
-    
+
     return deadline < today;
 }
 
