@@ -131,8 +131,27 @@ function validateForm() {
         showError(todoTitleInput, titleError, 'Bitte Titel eingeben.');
         valid = false;
     }
-    // Verantwortlichen validieren
     
+    // Verantwortlichen validieren
+    const assignee = todoAssigneeInput.value.trim();
+    if(assignee === '') {
+        showError(todoAssigneeInput, assigneeError, 'Bitte Verantwortlichen eingeben.');
+        valid = false;
+    }
+    
+    // Fälligkeitsdatum validieren
+    const deadline = todoDeadlineInput.value;
+    if (deadline === '') {
+        showError(todoDeadlineInput, deadlineError, 'Bitte Fälligkeitsdatum eingeben.');
+        valid = false;
+    } else {
+        const today = new Date();
+        const selectedDate = new Date(deadline);
+        if (selectedDate < today) {
+            showError(todoDeadlineInput, deadlineError, 'Das Datum darf nicht in der Vergangenheit liegen.');
+            valid = false;
+        }
+    }
 }
 
 /**
@@ -156,6 +175,18 @@ function validateForm() {
  */
 function showError(inputElement, errorElement, message) {
     // TODO: Implementiere die Anzeige von Fehlermeldungen
+    inputElement.classList.add('error');
+    errorElement.textContent = message;
+    errorElement.classList.add('visible');
+    setTimeout(() => {
+        errorElement.classList.remove('visible');
+        inputElement.classList.remove('error');
+    }, 3000);
+    // Optional: Animation hinzufügen
+    errorElement.classList.add('animated');
+    setTimeout(() => {
+        errorElement.classList.remove('animated');
+    }, 1000);
 }
 
 /**
@@ -175,6 +206,11 @@ function showError(inputElement, errorElement, message) {
  */
 function clearError(inputElement, errorElement) {
     // TODO: Implementiere das Löschen von Fehlermeldungen
+    inputElement.classList.remove('error');
+    errorElement.textContent = '';
+    errorElement.classList.remove('visible');
+    errorElement.classList.remove('animated');
+
 }
 
 /**
