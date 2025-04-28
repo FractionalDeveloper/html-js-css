@@ -116,6 +116,16 @@ function setupTodoForm() {
  */
 function setupFileUpload() {
     // TODO: Implementiere den Event-Listener für das Datei-Upload-Feld
+    todoFileInput.addEventListener('change', function(){
+        const file = todoFileInput.files[0];
+        if(file){
+            fileInfo.textContent = `Ausgewählte Datei: ${file.name}`;
+            fileInfo.classList.remove('hidden');
+        }else{
+            fileInfo.textContent = '';
+            fileInfo.classList.add('hidden');
+        }
+    })
 }
 
 /**
@@ -130,6 +140,18 @@ function setupFileUpload() {
  */
 function fileToBase64(file) {
     // TODO: Implementiere die Konvertierung einer Datei zu Base64
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64String = reader.result.split(',')[1];
+            resolve(base64String);
+        };
+        reader.onerror = (error) => {
+            console.error('Fehler beim Konvertieren der Datei zu Base64:', error);
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 // Formular validieren
@@ -220,7 +242,35 @@ function clearError(inputElement, errorElement) {
  * und dem Todo-Objekt hinzugefügt.
  */
 function addNewTodo() {
-    // TODO: Implementiere das Hinzufügen eines neuen Todos mit Dateianhang
+    // Werte aus dem Formular holen
+    const title = todoTitleInput.value.trim();
+    const assignee = todoAssigneeInput.value.trim();
+    const deadline = todoDeadlineInput.value;
+    
+    // Neues Todo-Objekt erstellen
+    const newTodo = {
+        id: Date.now(), // Eindeutige ID anhand des aktuellen Zeitstempels
+        title: title,
+        assignee: assignee,
+        deadline: deadline,
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+    
+    // Todo zum Array hinzufügen
+    todos.push(newTodo);
+    
+    // Todos im LocalStorage speichern
+    saveTodosToLocalStorage();
+    
+    // Todo in der Liste anzeigen
+    renderTodoList();
+    
+    // Formularfelder zurücksetzen
+    todoForm.reset();
+    
+    // Optional: Das neue Todo in der Konsole ausgeben
+    console.log('Neues Todo erstellt:', newTodo);
 }
 
 // Todos aus dem LocalStorage laden
