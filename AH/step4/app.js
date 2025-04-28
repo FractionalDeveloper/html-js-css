@@ -122,8 +122,8 @@ function setupTodoForm() {
  */
 function validateForm() {
     // TODO: Implementiere die Formularvalidierung
-0
-    const valid = true;
+
+    let valid = true;
 
     // Titel validieren
     const title = todoTitleInput.value.trim();
@@ -182,7 +182,7 @@ function showError(inputElement, errorElement, message) {
         errorElement.classList.remove('visible');
         inputElement.classList.remove('error');
     }, 3000);
-
+    
     // Optional: Animation hinzufügen
     errorElement.classList.add('animated');
     setTimeout(() => {
