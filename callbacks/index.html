@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockierender Code vs. Callbacks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px 0;
+            width: 100%;
+            cursor: pointer;
+        }
+        .animation {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        .counter {
+            font-weight: bold;
+            font-size: 24px;
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blockierender Code vs. Callbacks</h1>
+
+    <div class="container">
+        <div class="column">
+            <h2>Blockierender Code</h2>
+            <p>Diese Seite friert komplett ein:</p>
+            <div class="animation"></div>
+            <div class="counter" id="counter1">0</div>
+            <button id="blockingButton">Schwere Berechnung starten</button>
+            <div class="output" id="output1"></div>
+        </div>
+
+        <div class="column">
+            <h2>Mit Callbacks</h2>
+            <p>Die Seite bleibt reaktionsfähig:</p>
+            <div class="animation"></div>
+            <div class="counter" id="counter2">0</div>
+            <button id="callbackButton">Schwere Berechnung starten</button>
+            <div class="output" id="output2"></div>
+        </div>
+    </div>
+
+    <script>
+        // Counter Animation
+        const counter1 = document.getElementById('counter1');
+        const counter2 = document.getElementById('counter2');
+        let count = 0;
+
+        // Aktualisiert die Counter alle 100ms
+        setInterval(() => {
+            count++;
+            counter1.textContent = count;
+            counter2.textContent = count;
+        }, 100);
+
+        // Simuliert eine intensive Berechnung
+        function schwereBerechnungDurchführen() {
+            // Wir berechnen viele Primzahlen, um CPU-Last zu erzeugen
+            const output = [];
+            const max = 1000000000000;
+
+            output.push(`Starte Berechnung von Primzahlen bis ${max.toLocaleString()}...`);
+
+            const startTime = Date.now();
+
+            // Dies ist absichtlich ineffizient, um CPU zu belasten
+            for (let num = 2; num <= max; num++) {
+                let isPrime = true;
+                for (let i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime && num % 10000 === 1) {
+                    output.push(`Primzahl gefunden: ${num.toLocaleString()}`);
+                }
+            }
+
+            const duration = (Date.now() - startTime) / 1000;
+            output.push(`Berechnung abgeschlossen in ${duration.toFixed(2)} Sekunden.`);
+
+            return output.join('<br>');
+        }
+
+        // BLOCKIERENDER CODE
+        document.getElementById('blockingButton').addEventListener('click', function() {
+            const output1 = document.getElementById('output1');
+            output1.innerHTML = "Starte Berechnung...";
+
+            // Dieser Code blockiert den Thread, bis er fertig ist
+            // Die Animation stoppt, der Counter friert ein, die UI reagiert nicht mehr
+            const result = schwereBerechnungDurchführen();
+
+            output1.innerHTML = result;
+        });
+
+        // MIT CALLBACKS - NICHT BLOCKIEREND
+        document.getElementById('callbackButton').addEventListener('click', function() {
+            const output2 = document.getElementById('output2');
+            output2.innerHTML = "Starte Berechnung...";
+
+            // Wir teilen die Berechnung in kleine Schritte auf
+            const max = 1000000000000000000;
+            const output = [];
+            output.push(`Starte Berechnung von Primzahlen bis ${max.toLocaleString()}...`);
+
+            const startTime = Date.now();
+            let currentNum = 2;
+
+            // Berechnet eine kleine Menge an Zahlen und plant dann den nächsten Schritt ein
+            function berechnungsSchritt() {
+                const endNum = Math.min(currentNum + 10000, max);
+
+                for (let num = currentNum; num <= endNum; num++) {
+                    let isPrime = true;
+                    for (let i = 2; i <= Math.sqrt(num); i++) {
+                        if (num % i === 0) {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+                    if (isPrime && num % 10000 === 1) {
+                        output.push(`Primzahl gefunden: ${num.toLocaleString()}`);
+                    }
+                }
+
+                // Aktualisiere die Ausgabe
+                output2.innerHTML = output.join('<br>');
+
+                currentNum = endNum + 1;
+
+                if (currentNum <= max) {
+                    // Nächster Schritt wird eingeplant, aber der Thread wird freigegeben
+                    setTimeout(berechnungsSchritt, 0);
+                } else {
+                    // Berechnung abgeschlossen
+                    const duration = (Date.now() - startTime) / 1000;
+                    output.push(`Berechnung abgeschlossen in ${duration.toFixed(2)} Sekunden.`);
+                    output2.innerHTML = output.join('<br>');
+                }
+            }
+
+            // Starte den ersten Schritt
+            setTimeout(berechnungsSchritt, 0);
+        });
+    </script>
+    <script src="imports.js" type="module"></script>
+    <script src="webstorage.js"></script>
+</body>
+</html>
