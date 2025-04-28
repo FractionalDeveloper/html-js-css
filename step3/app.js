@@ -116,7 +116,14 @@ function setupTodoForm() {
  */
 function addNewTodo() {
     // TODO: Implementiere die Funktion zum Hinzufügen eines neuen Todos
-}
+    const newTodo = {
+        id: Date.now(),
+        titel: todoTitleInput.value.trim(),
+        verantwortlicher: todoAssigneeInput.value.trim(),
+        faelligkeit: todoDeadlineInput.value.trim(),
+        erledigt: false,
+        erstelltAm: new Date().toISOString()
+};
 
 /**
  * Todo-Liste rendern
