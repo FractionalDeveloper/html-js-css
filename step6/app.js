@@ -86,12 +86,12 @@ function setActiveNavItem(activeNavItem) {
 
 // Event-Listener für das Todo-Formular einrichten
 function setupTodoForm() {
-    todoForm.addEventListener('submit', function(e) {
+    todoForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Formular validieren und bei Erfolg ein neues Todo erstellen
         if (validateForm()) {
-            addNewTodo();
+            await addNewTodo(); //Auf Ergänzung warten, bevor das Formular zurückgesetzt wird
         }
     });
 
@@ -116,6 +116,18 @@ function setupTodoForm() {
  */
 function setupFileUpload() {
     // TODO: Implementiere den Event-Listener für das Datei-Upload-Feld
+
+    todoFileInput.addEventListener('change', function() {
+        const file = todoFileInput.files[0];
+        if (file) {
+            fileInfo.textContent = `Ausgewählte Datei: ${file.name}`;
+            fileInfo.classList.remove('hidden');
+        } else {
+            fileInfo.textContent = '';
+            fileInfo.classList.add('hidden');
+        }
+    });
+
 }
 
 /**
@@ -130,6 +142,21 @@ function setupFileUpload() {
  */
 function fileToBase64(file) {
     // TODO: Implementiere die Konvertierung einer Datei zu Base64
+
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64String = reader.result.split(',')[1];
+            console.log('Datei erfolgreich konvertiert zu Base64:', base64String);
+            resolve(base64String);
+        };
+        reader.onerror = (error) => {
+            console.error('Fehler beim Konvertieren der Datei zu Base64:', error);
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
+
 }
 
 // Formular validieren
@@ -219,9 +246,43 @@ function clearError(inputElement, errorElement) {
  * Wenn eine Datei ausgewählt wurde, wird sie zu Base64 konvertiert
  * und dem Todo-Objekt hinzugefügt.
  */
-function addNewTodo() {
-    // TODO: Implementiere das Hinzufügen eines neuen Todos mit Dateianhang
+async function addNewTodo() {
+    const title = todoTitleInput.value.trim();
+    const assignee = todoAssigneeInput.value.trim();
+    const deadline = todoDeadlineInput.value;
+    const file = todoFileInput.files[0];
+    let fileBase64 = null;
+
+    if (file) {
+        try {
+            console.log('Konvertiere Datei zu Base64...', file);
+            fileBase64 = await fileToBase64(file);
+            console.log('Datei erfolgreich konvertiert zu Base64:', fileBase64);
+        } catch (error) {
+            showError(todoFileInput, fileError, 'Fehler beim Verarbeiten der Datei');
+            return;
+        }
+    }
+
+    const newTodo = {
+        id: Date.now(),
+        title,
+        assignee,
+        deadline,
+        completed: false,
+        createdAt: new Date().toISOString(),
+        file: fileBase64
+    };
+
+    todos.push(newTodo);
+    saveTodosToLocalStorage();
+    renderTodoList();
+    todoForm.reset();
+    fileInfo.textContent = '';
+    fileInfo.classList.add('hidden');
+    showSuccessMessage('Aufgabe erfolgreich hinzugefügt!');
 }
+
 
 // Todos aus dem LocalStorage laden
 function loadTodosFromLocalStorage() {
@@ -293,6 +354,7 @@ function renderTodoList() {
         const todoItem = createTodoElement(todo);
         todoList.appendChild(todoItem);
     });
+
 }
 
 /**
@@ -305,6 +367,45 @@ function renderTodoList() {
  */
 function createTodoElement(todo) {
     // TODO: Implementiere das Erstellen eines Todo-Elements mit Dateianhang
+    const todoItem = document.createElement('li');
+    todoItem.className = 'todo-item';
+    todoItem.dataset.id = todo.id;
+    if (todo.completed) {
+        todoItem.classList.add('completed');
+    }
+    else if (isOverdue(todo.deadline)) {
+        todoItem.classList.add('overdue');
+    }
+    todoItem.innerHTML = `
+    <div class="todo-info">
+    <div class="todo-title">${todo.title}</div>
+    <div class="todo-details">
+        <span class="todo-assignee">Verantwortlich: ${todo.assignee}</span>
+        <span class="todo-deadline">Fällig: ${formatDate(todo.deadline)}</span>
+    </div>
+    </div>
+    <div class="todo-actions">
+    <button class="complete-btn">${todo.completed ? 'Wiederherstellen' : 'Erledigt'}</button>
+    <button class="delete-btn">Löschen</button>
+        ${todo.file ? `<button class="download-btn">Download</button>` : ''}
+    </div> 
+    `;
+    // Event-Listener für die Buttons hinzufügen
+    const completeButton = todoItem.querySelector('.complete-btn');
+    completeButton.addEventListener('click', () => toggleTodoComplete(todo.id));
+    
+    const deleteButton = todoItem.querySelector('.delete-btn');
+    deleteButton.addEventListener('click', () => deleteTodo(todo.id));
+    const downloadButton = todoItem.querySelector('.download-btn');
+    if (downloadButton) {
+        downloadButton.addEventListener('click', () => {
+            if (todo.file) {
+                const dataUrl = `data:text/plain;base64,${todo.file}`;
+                downloadFile(dataUrl, todo.title);
+            }
+        });
+    }
+    return todoItem;
 }
 
 /**
@@ -319,6 +420,14 @@ function createTodoElement(todo) {
  */
 function downloadFile(dataUrl, fileName) {
     // TODO: Implementiere den Download der Datei
+
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = fileName + '.txt'; //.txt an den Dateinamen anhängen, um nur Textdateien zu zulassen.
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
 }
 
 // Todo als erledigt markieren oder wiederherstellen
