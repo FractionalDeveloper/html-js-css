@@ -486,9 +486,11 @@ function showSuccessMessage(message) {
     const messageElement = document.createElement('div');
     messageElement.className = 'success-message';
     messageElement.textContent = message;
+    messageElement.style.textAlign = 'center';
     messageElement.style.position = 'fixed';
     messageElement.style.bottom = '20px';
     messageElement.style.right = '20px';
+    messageElement.style.left = '50%';
     messageElement.style.padding = '10px 20px';
     messageElement.style.backgroundColor = '#4CAF50';
     messageElement.style.color = 'white';
@@ -496,6 +498,8 @@ function showSuccessMessage(message) {
     messageElement.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
     messageElement.style.zIndex = '1000';
     messageElement.style.transition = 'opacity 0.5s';
+    messageElement.style.transform = 'translateX(-50%)';
+    
     
     // Meldung zum Dokument hinzufügen
     document.body.appendChild(messageElement);
