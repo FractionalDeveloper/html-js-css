@@ -3,11 +3,13 @@
 </script>
 
 <template>
-<<<NuxtLayout >
-    <<NuxtPage />
-</NuxtLayout>
+  <div class="h-screen flex flex-col">
+  <NuxtLayout>
+    <NuxtPage/>
+  </NuxtLayout>
+  </div>
 </template>
 
-<style scoped >
+<style scoped>
 
 </style>
