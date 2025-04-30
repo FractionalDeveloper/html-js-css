@@ -5,6 +5,9 @@ const longitude = ref(0);
 const wetterData = ref<any>(null);
 const error = ref<string | null>(null);
 
+const time = ref(new Date().toLocaleTimeString());
+let intervalId: ReturnType<typeof setInterval>;
+
 function fetchWeather(lat: number, lon: number) {
   fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
     .then((response) => {
@@ -30,26 +33,41 @@ function handleError(err: GeolocationPositionError) {
 }
 
 onMounted(() => {
+  intervalId = setInterval(() => {
+    time.value = new Date().toLocaleTimeString();
+  }, 1000);
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handlePosition, handleError);
   } else {
     error.value = "Geolocation wird von diesem Browser nicht unterstützt.";
   }
 });
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
+
 </script>
 
-
 <template>
-    <div class="flex justify-center items-center text-center h-32">
-      <span v-if="error">{{ error }}</span>
-      <span v-else-if="!wetterData">Lade Wetterdaten...</span>
-      <span v-else>
+    <div class="flex justify-center items-center text-center w-full">
+      <span class="text" v-if="error">{{ error }}</span>
+      <span class="text" v-else-if="!wetterData">Lade Wetterdaten...</span>
+      <span class="text" v-else>
         Temperatur: {{ wetterData.current_weather.temperature }} °C<br>
         Windgeschwindigkeit: {{ wetterData.current_weather.windspeed }} km/h
+        <br><br>
+        Latitude: {{ latitude }}<br>
+        Longitude: {{ longitude }}
       </span>
     </div>
   </template>
 
 <style scoped>
-    
+    .text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffffff;
+    }
 </style>
